@@ -1,0 +1,11 @@
+repositories:
+  - name: traefik
+    url: https://helm.traefik.io/traefik
+
+releases:
+  - name: traefik
+    namespace: traefik
+    chart: traefik/traefik
+    version: 10.19.4
+    values:
+      - values.yaml
