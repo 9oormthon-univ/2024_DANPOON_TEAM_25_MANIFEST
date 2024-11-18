@@ -23,7 +23,7 @@ ports:
     port: 443
     expose: true
 
-persistenceVolumeClass:
+persistenceVolumeClaim:
   enabled: true
   accessMode: ReadWriteOnce
   size: 128Mi
