@@ -3,6 +3,11 @@ deployment:
   podAnnotations:
     traefik.enable: "true"
 
+service:
+  type: LoadBalancer
+  externalIPs:
+    - 213.190.4.144
+
 additionalArguments:
   - "--entrypoints.web.address=:80"
   - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
