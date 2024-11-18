@@ -57,3 +57,4 @@ secret:
   basicAuth:
     HTTP_BASIC_USER: ${HTTP_BASIC_USER}
     HTTP_BASIC_PWD: ${HTTP_BASIC_PWD}
+  domainname: "flakeide.com"
