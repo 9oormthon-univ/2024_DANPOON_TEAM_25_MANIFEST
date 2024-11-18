@@ -8,4 +8,4 @@ releases:
     chart: traefik/traefik
     version: 10.19.4
     values:
-      - values.yaml
+      - traefik/values.yaml
