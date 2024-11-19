@@ -3,16 +3,30 @@ kind: Application
 metadata:
   name: jenkins
   namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-succeeded: "true"
+    notifications.argoproj.io/subscribe.on-sync-failed: "true"
 spec:
   project: default
   source:
     repoURL: "https://github.com/9oormthon-univ/2024_DANPOON_TEAM_25_MANIFEST"
     path: "jenkins"
-    targetRevision: HEAD
+    targetRevision: main # 특정 브랜치를 지정하려면 'main' 또는 원하는 브랜치명으로 변경
   destination:
     server: "https://kubernetes.default.svc"
     namespace: jenkins
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
+      prune: true # 더 이상 필요없는 리소스 자동 제거
+      selfHeal: true # 직접 변경된 리소스 자동 복구
+      allowEmpty: false # 빈 디렉토리 배포 방지
+    syncOptions:
+      - CreateNamespace=true # 네임스페이스 자동 생성
+      - PrunePropagationPolicy=foreground # 리소스 삭제 시 종속성 고려
+      - PruneLast=true # 새 리소스 생성 후 이전 리소스 제거
+    retry:
+      limit: 5 # 동기화 실패 시 재시도 횟수
+      backoff:
+        duration: 5s # 초기 대기 시간
+        factor: 2 # 재시도 간격 증가 비율
+        maxDuration: 3m # 최대 대기 시간
