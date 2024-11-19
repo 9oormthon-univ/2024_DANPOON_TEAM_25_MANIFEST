@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: container-server
+  namespace: container-server
+spec:
+  selector:
+    app: container-server
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer

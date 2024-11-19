@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-server
+  namespace: container-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: container-server
+  template:
+    metadata:
+      labels:
+        app: container-server
+    spec:
+      containers:
+        - name: container-server
+          image: milkymilky0116/flake-ide-container-server:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
