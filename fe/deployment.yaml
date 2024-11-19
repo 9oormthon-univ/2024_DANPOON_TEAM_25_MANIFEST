@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flakeide-fe
+  namespace: flakeide-fe
+  labels:
+    app: flakeide-fe
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flakeide-fe
+  template:
+    metadata:
+      labels:
+        app: flakeide-fe
+    spec:
+      containers:
+        - name: flakeide-fe
+          image: milkymilky0116/flakeide-fe:latest
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
