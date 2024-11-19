@@ -10,7 +10,7 @@ spec:
     - match: Host(`argocd.flakeide.com`) # 여기서 도메인을 실제 사용 도메인으로 변경
       kind: Rule
       services:
-        - name: argocd-server-859559bb94-9thdx
+        - name: argocd-server
           port: 80
   tls:
     certResolver: "letsencrypt"
