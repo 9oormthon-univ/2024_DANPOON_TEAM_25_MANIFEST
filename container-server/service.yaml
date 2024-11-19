@@ -4,9 +4,10 @@ metadata:
   name: container-server
   namespace: container-server
 spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 31000
   selector:
     app: container-server
-  ports:
-    - port: 80
-      targetPort: 8080
-  type: LoadBalancer
