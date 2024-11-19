@@ -1,11 +1,7 @@
+# jenkins-values.yaml
 controller:
-  image: "jenkins/jenkins:lts" # Jenkins Docker Hub 이미지
-  installPlugins:
-    - kubernetes:1.30.0
-    - workflow-aggregator:2.6
-    - credentials-binding:1.24
-    - git:4.7.1
-  serviceType: LoadBalancer
+  image: "jenkins/jenkins:lts" # Jenkins 이미지
+  tag: "lts"
   resources:
     requests:
       cpu: "500m"
@@ -13,3 +9,10 @@ controller:
     limits:
       cpu: "1"
       memory: "2Gi"
+  service:
+    type: ClusterIP
+    port: 5000
+persistence:
+  enabled: true
+  size: "10Gi"
+  storageClass: "standard" # 필요한 경우, 스토리지 클래스 이름으로 변경
