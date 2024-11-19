@@ -20,6 +20,32 @@ spec:
           image: milkymilky0116/flake-ide-be:latest
           ports:
             - containerPort: 8080
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: be-secret
+                  key: db_host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: be-secret
+                  key: db_port
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: be-secret
+                  key: db_username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: be-secret
+                  key: db_password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: be-secret
+                  key: db_name
           resources:
             requests:
               cpu: 100m
@@ -32,10 +58,10 @@ spec:
               path: /
               port: 8080
             initialDelaySeconds: 5
-            periodSeconds: 10
+            periodSeconds: 60
           livenessProbe:
             httpGet:
               path: /
               port: 8080
             initialDelaySeconds: 15
-            periodSeconds: 20
+            periodSeconds: 120
