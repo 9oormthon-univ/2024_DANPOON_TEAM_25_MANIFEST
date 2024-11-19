@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "https://github.com/your-repo/jenkins-manifests"
-    path: "path/to/jenkins"
+    repoURL: "https://github.com/9oormthon-univ/2024_DANPOON_TEAM_25_MANIFEST"
+    path: "jenkins"
     targetRevision: HEAD
   destination:
     server: "https://kubernetes.default.svc"
