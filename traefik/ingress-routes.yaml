@@ -29,7 +29,7 @@ spec:
     - match: Host(`argocd.flakeide.com`)
       kind: Rule
       services:
-        - name: argocd
+        - name: argocd-server
           port: 8080
   tls:
     certResolver: myresolver
