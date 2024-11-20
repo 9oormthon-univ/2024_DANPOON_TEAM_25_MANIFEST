@@ -13,5 +13,12 @@ spec:
       services:
         - name: jenkins
           port: 8080
+  routes:
+    - match: Host(`argocd.flakeide.com`)
+      kind: Rule
+      services:
+        - name: argocd
+          port: 8080
+
   tls:
     certResolver: myresolver
