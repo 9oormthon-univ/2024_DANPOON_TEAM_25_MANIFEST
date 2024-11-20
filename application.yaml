@@ -175,10 +175,6 @@ spec:
           enabled: true
           type: LoadBalancer
           
-        serviceAccount:
-          name: traefik-system
-          namespace: traefik-system
-          
         # 메트릭스 활성화
         metrics:
           prometheus:
