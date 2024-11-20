@@ -15,3 +15,21 @@ spec:
           port: 8080
   tls:
     certResolver: myresolver
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: flakeide-fe-route
+  namespace: flakeide-fe
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`flakeide.com`)
+      kind: Rule
+      services:
+        - name: flakeide-fe
+          port: 8080
+  tls:
+    certResolver: myresolver
