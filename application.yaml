@@ -132,101 +132,29 @@ kind: Application
 metadata:
   name: traefik
   namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-succeeded: "true"
+    notifications.argoproj.io/subscribe.on-sync-failed: "true"
 spec:
   project: default
   source:
-    chart: traefik
-    repoURL: https://helm.traefik.io/traefik
-    targetRevision: 10.19.5
-    helm:
-      values: |
-        deployment:
-          enabled: true
-          replicas: 2
-          # 헬스체크 설정 추가
-          podAnnotations:
-            prometheus.io/scrape: "true"
-            prometheus.io/port: "9100"
-          
-        # 리소스 제한 설정 추가
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "50Mi"
-          limits:
-            cpu: "300m"
-            memory: "150Mi"
-            
-        # 헬스체크 엔드포인트 추가
-        additionalArguments:
-          - "--ping=true"
-          - "--ping.entrypoint=ping"
-          
-        # 핑 엔드포인트 설정
-        entryPoints:
-          ping:
-            address: ":9000"
-          web:
-            address: ":8000"
-          websecure:
-            address: ":8443"
-
-        service:
-          enabled: true
-          type: LoadBalancer
-          
-        # 메트릭스 활성화
-        metrics:
-          prometheus:
-            enabled: true
-            serviceMonitor:
-              enabled: true
-              
-        ports:
-          web:
-            port: 8000
-            expose: true
-            exposedPort: 80
-            protocol: TCP
-          websecure:
-            port: 8443
-            expose: true
-            exposedPort: 443
-            protocol: TCP
-            
-        ssl:
-          enabled: true
-          permanentRedirect: true
-          
-        dashboard:
-          enabled: true
-          domain: "traefik.flakeide.com"
-          
-        providers:
-          kubernetesCRD:
-            enabled: true
-          kubernetesIngress:
-            enabled: true
-            
-        # 미들웨어 설정 추가
-        middleware:
-          enabled: true
-          
-        logs:
-          general:
-            level: INFO
-          access:
-            enabled: true
-            filters:
-              statuscodes: "400-599"  # 오류 로그만 기록
-
+    repoURL: "https://github.com/9oormthon-univ/2024_DANPOON_TEAM_25_MANIFEST"
+    path: "traefik"
+    targetRevision: HEAD
   destination:
-    server: https://kubernetes.default.svc
-    namespace: traefik-system
-
+    server: "https://kubernetes.default.svc"
+    namespace: traefik
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
+      prune: true # 더 이상 필요없는 리소스 자동 제거
+      selfHeal: true # 직접 변경된 리소스 자동 복구
+      allowEmpty: false # 빈 디렉토리 배포 방지
     syncOptions:
-      - CreateNamespace=true
+      - CreateNamespace=true # 네임스페이스 자동 생성
+      - PrunePropagationPolicy=foreground # 리소스 삭제 시 종속성 고려
+      - PruneLast=true # 새 리소스 생성 후 이전 리소스 제거
+    retry:
+      limit: 5 # 동기화 실패 시 재시도 횟수
+      backoff:
+        duration: 5s # 초기 대기 시간
+        factor: 2 # 재시도 간격 증가 비율

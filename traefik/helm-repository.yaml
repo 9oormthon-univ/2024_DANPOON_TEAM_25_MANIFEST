@@ -1,0 +1,7 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Repository
+metadata:
+  name: traefik-helm-repo
+spec:
+  type: helm
+  url: https://traefik.github.io/charts
