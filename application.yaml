@@ -137,24 +137,55 @@ spec:
   source:
     chart: traefik
     repoURL: https://helm.traefik.io/traefik
-    targetRevision: 10.19.5 # 원하는 Traefik 버전 지정
+    targetRevision: 10.19.5
     helm:
       values: |
-        # Traefik 기본 설정
         deployment:
           enabled: true
           replicas: 2
+          # 헬스체크 설정 추가
+          podAnnotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/port: "9100"
+          
+        # 리소스 제한 설정 추가
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "50Mi"
+          limits:
+            cpu: "300m"
+            memory: "150Mi"
+            
+        # 헬스체크 엔드포인트 추가
+        additionalArguments:
+          - "--ping=true"
+          - "--ping.entrypoint=ping"
+          
+        # 핑 엔드포인트 설정
+        entryPoints:
+          ping:
+            address: ":9000"
+          web:
+            address: ":8000"
+          websecure:
+            address: ":8443"
 
-        # 서비스 설정
         service:
           enabled: true
           type: LoadBalancer
-
+          
         serviceAccount:
           name: traefik-system
           namespace: traefik-system
-
-        # 인그레스 라우트 설정
+          
+        # 메트릭스 활성화
+        metrics:
+          prometheus:
+            enabled: true
+            serviceMonitor:
+              enabled: true
+              
         ports:
           web:
             port: 8000
@@ -166,30 +197,32 @@ spec:
             expose: true
             exposedPort: 443
             protocol: TCP
-
-        # SSL 설정
+            
         ssl:
           enabled: true
           permanentRedirect: true
-
-        # 대시보드 설정
+          
         dashboard:
           enabled: true
           domain: "traefik.flakeide.com"
-
-        # 프로바이더 설정
+          
         providers:
           kubernetesCRD:
             enabled: true
           kubernetesIngress:
             enabled: true
             
-        # 로깅 설정
+        # 미들웨어 설정 추가
+        middleware:
+          enabled: true
+          
         logs:
           general:
             level: INFO
           access:
             enabled: true
+            filters:
+              statuscodes: "400-599"  # 오류 로그만 기록
 
   destination:
     server: https://kubernetes.default.svc
