@@ -109,7 +109,7 @@ spec:
     repoURL: "https://github.com/9oormthon-univ/2024_DANPOON_TEAM_25_MANIFEST"
     path: "be"
     targetRevision: HEAD
-    destination:
+  destination:
     server: "https://kubernetes.default.svc"
     namespace: flakeide-be
   syncPolicy:
