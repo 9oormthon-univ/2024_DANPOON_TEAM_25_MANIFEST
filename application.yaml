@@ -150,6 +150,10 @@ spec:
           enabled: true
           type: LoadBalancer
 
+        serviceAccount:
+          name: traefik-system
+          namespace: traefik-system
+
         # 인그레스 라우트 설정
         ports:
           web:
