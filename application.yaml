@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: "https://github.com/9oormthon-univ/2024_DANPOON_TEAM_25_MANIFEST"
     path: "jenkins"
-    targetRevision: main # 특정 브랜치를 지정하려면 'main' 또는 원하는 브랜치명으로 변경
+    targetRevision: HEAD # 특정 브랜치를 지정하려면 'main' 또는 원하는 브랜치명으로 변경
   destination:
     server: "https://kubernetes.default.svc"
     namespace: jenkins
@@ -44,7 +44,7 @@ spec:
   source:
     repoURL: "https://github.com/9oormthon-univ/2024_DANPOON_TEAM_25_MANIFEST"
     path: "container-server"
-    targetRevision: main # 특정 브랜치를 지정하려면 'main' 또는 원하는 브랜치명으로 변경
+    targetRevision: HEAD # 특정 브랜치를 지정하려면 'main' 또는 원하는 브랜치명으로 변경
   destination:
     server: "https://kubernetes.default.svc"
     namespace: container-server
