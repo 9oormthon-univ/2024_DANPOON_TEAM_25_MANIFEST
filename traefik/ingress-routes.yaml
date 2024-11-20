@@ -13,12 +13,23 @@ spec:
       services:
         - name: jenkins
           port: 8080
+  tls:
+    certResolver: myresolver
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-route
+  namespace: argocd
+spec:
+  entryPoints:
+    - web
+    - websecure
   routes:
     - match: Host(`argocd.flakeide.com`)
       kind: Rule
       services:
         - name: argocd
           port: 8080
-
   tls:
     certResolver: myresolver
