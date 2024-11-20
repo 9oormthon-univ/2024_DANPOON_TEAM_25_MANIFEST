@@ -19,7 +19,7 @@ spec:
         - name: flakeide-be
           image: milkymilky0116/flake-ide-be:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
           env:
             - name: DB_HOST
               valueFrom:
@@ -56,12 +56,12 @@ spec:
           readinessProbe:
             httpGet:
               path: /health_check
-              port: 8080
+              port: 8081
             initialDelaySeconds: 5
             periodSeconds: 60
           livenessProbe:
             httpGet:
               path: /health_check
-              port: 8080
+              port: 8081
             initialDelaySeconds: 15
             periodSeconds: 120
