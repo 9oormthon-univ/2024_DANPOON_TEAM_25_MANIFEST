@@ -10,21 +10,41 @@ kind: ClusterRole
 metadata:
   name: traefik
 rules:
+  # 기본 Kubernetes 리소스에 대한 권한
   - apiGroups: [""]
     resources:
       - services
       - endpoints
       - secrets
     verbs: ["get", "list", "watch"]
-  - apiGroups: ["extensions", "networking.k8s.io"]
+
+  # Ingress 리소스에 대한 권한
+  - apiGroups: ["networking.k8s.io"]
     resources:
-      - ingress
+      - ingresses
     verbs: ["get", "list", "watch"]
+
+  # Traefik CRD 리소스에 대한 권한
   - apiGroups: ["traefik.containo.us"]
     resources:
       - ingressroutes
+      - ingressroutetcps
+      - ingressrouteudps
       - middlewares
+      - middlewaretcps
+      - tlsoptions
+      - tlsstores
+      - serverstransports
       - traefikservices
+    verbs: ["get", "list", "watch"]
+
+  # 추가적인 Traefik 리소스가 필요한 경우 여기에 추가
+  - apiGroups: ["traefik.containo.us"]
+    resources:
+      - entrypoints
+      - routers
+      - services
+      - tlsconfigs
     verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
