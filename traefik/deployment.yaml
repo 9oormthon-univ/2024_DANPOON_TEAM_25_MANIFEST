@@ -18,13 +18,17 @@ spec:
       serviceAccountName: traefik
       containers:
         - name: traefik
-          image: traefik:v2.9
+          image: traefik:v2.9 # 가능한 최신 안정 버전 사용 권장
           args:
             - "--api.insecure=true" # 프로덕션 환경에서는 보안 설정 필요
             - "--providers.kubernetescrd"
             - "--providers.kubernetesingress"
             - "--entrypoints.web.address=:80"
             - "--entrypoints.websecure.address=:443"
+            - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+            - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+            - "--certificatesresolvers.myresolver.acme.email=sjlee990129@gmail.com" # 실제 이메일로 변경
+            - "--certificatesresolvers.myresolver.acme.storage=/data/acme.json"
           ports:
             - name: web
               containerPort: 80
@@ -32,6 +36,9 @@ spec:
               containerPort: 443
             - name: admin
               containerPort: 8080
+          volumeMounts:
+            - name: acme
+              mountPath: /data
           livenessProbe:
             httpGet:
               path: /ping
@@ -44,3 +51,7 @@ spec:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 10
+      volumes:
+        - name: acme
+          persistentVolumeClaim:
+            claimName: traefik-acme-pvc
