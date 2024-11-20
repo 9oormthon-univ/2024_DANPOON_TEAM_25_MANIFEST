@@ -17,7 +17,7 @@ spec:
         - name: container-server
           image: milkymilky0116/flake-ide-container-server:latest
           ports:
-            - containerPort: 8082
+            - containerPort: 50051
           resources:
             requests:
               cpu: 100m
