@@ -33,3 +33,21 @@ spec:
           port: 3000
   tls:
     certResolver: myresolver
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: flakeide-be
+  namespace: flakeide-be
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`be.flakeide.com`)
+      kind: Rule
+      services:
+        - name: flakeide-be
+          port: 8081
+  tls:
+    certResolver: myresolver
