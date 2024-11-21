@@ -18,6 +18,17 @@ spec:
           image: milkymilky0116/flake-ide-container-server:latest
           ports:
             - containerPort: 50051
+          env:
+            - name: DOCKER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: container-server-secret
+                  key: docker_username
+            - name: DOCKER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: container-server-secret
+                  key: docker_username
           resources:
             requests:
               cpu: 100m
