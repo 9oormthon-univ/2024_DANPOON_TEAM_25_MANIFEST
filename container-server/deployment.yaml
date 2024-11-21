@@ -24,7 +24,7 @@ spec:
                 secretKeyRef:
                   name: container-server-secret
                   key: docker_username
-            - name: DOCKER_PASSWORD
+            - name: DOCKER_CREDENTIAL
               valueFrom:
                 secretKeyRef:
                   name: container-server-secret
