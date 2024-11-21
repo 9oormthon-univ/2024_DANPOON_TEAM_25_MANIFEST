@@ -26,6 +26,7 @@ spec:
             - "--entrypoints.web.address=:80"
             - "--entrypoints.websecure.address=:443"
             - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+            - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
             - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
             - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
             - "--certificatesresolvers.myresolver.acme.email=sjlee990129@gmail.com" # 실제 이메일로 변경
