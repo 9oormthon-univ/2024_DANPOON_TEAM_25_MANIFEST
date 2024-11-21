@@ -32,10 +32,10 @@ spec:
           resources:
             requests:
               cpu: 2Gi
-              memory: 1Gi
+              memory: 2Gi
             limits:
-              cpu: 500m
-              memory: 500Mi
+              cpu: 2Gi
+              memory: 2Gi
           volumeMounts:
             - name: docker-socket
               mountPath: /var/run/docker.sock
