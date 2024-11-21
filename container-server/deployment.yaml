@@ -4,7 +4,7 @@ metadata:
   name: container-server
   namespace: container-server
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: container-server
@@ -31,7 +31,7 @@ spec:
                   key: docker_credentials
           resources:
             requests:
-              cpu: 500m
+              cpu: 100m
               memory: 1Gi
             limits:
               cpu: 2000m
