@@ -4,7 +4,7 @@ metadata:
   name: container-server
   namespace: container-server
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: container-server
