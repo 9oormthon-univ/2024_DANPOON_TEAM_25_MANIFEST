@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: container-server
-          image: milkymilky0116/flake-ide-container-server:ad3c239
+          image: milkymilky0116/flake-ide-container-server:9137408
           ports:
             - containerPort: 50051
           env:
