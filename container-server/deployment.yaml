@@ -28,7 +28,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: container-server-secret
-                  key: docker_username
+                  key: docker_credentials
           resources:
             requests:
               cpu: 500m
