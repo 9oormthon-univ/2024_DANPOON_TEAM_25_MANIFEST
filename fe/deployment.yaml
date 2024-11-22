@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flakeide-fe
-          image: milkymilky0116/flake-ide-fe:20d5bd6
+          image: milkymilky0116/flake-ide-fe:231bd62
           ports:
             - containerPort: 3000
           resources:
