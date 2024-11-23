@@ -26,7 +26,6 @@ spec:
                 secretKeyRef:
                   name: be-secret
                   key: db_name
-
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
