@@ -25,6 +25,7 @@ spec:
             - "--providers.kubernetesingress"
             - "--entrypoints.web.address=:80"
             - "--entrypoints.websecure.address=:443"
+            - "--certificatesresolvers.myresolver.acme.server=https://acme-v02.api.letsencrypt.org/directory"
             - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
             - "--certificatesresolvers.myresolver.acme.email=sjlee990129@gmail.com" # 실제 이메일로 변경
             - "--certificatesresolvers.myresolver.acme.storage=/data/acme.json"
