@@ -55,6 +55,25 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
+  name: container-server
+  namespace: container-server
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`container.flakeide.com`)
+      kind: Rule
+      services:
+        - name: container
+          port: 50051
+  tls:
+    certResolver: myresolver
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
   name: ide-user1course1
   namespace: ide
 spec:
