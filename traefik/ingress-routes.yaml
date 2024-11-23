@@ -65,11 +65,10 @@ spec:
     - match: Host(`container.flakeide.com`)
       kind: Rule
       services:
-        - name: container
+        - name: container-server
           port: 50051
   tls:
     certResolver: myresolver
-
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
