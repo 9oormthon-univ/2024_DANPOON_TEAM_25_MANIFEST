@@ -36,7 +36,7 @@ spec:
                 secretKeyRef:
                   name: postgres-config
                   key: POSTGRES_PASSWORD
-         resources:
+          resources:
             requests:
               memory: "256Mi"
               cpu: "250m"
