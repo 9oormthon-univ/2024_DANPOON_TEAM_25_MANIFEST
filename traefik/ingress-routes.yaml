@@ -87,3 +87,21 @@ spec:
           port: 5432
   tls:
     certResolver: myresolver
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ide-user1course1
+  namespace: ide
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`Y291cnNlMQ.flakeide.com`)
+      kind: Rule
+      services:
+        - name: ide-user1course1
+          port: 8080
+  tls:
+    certResolver: myresolver
