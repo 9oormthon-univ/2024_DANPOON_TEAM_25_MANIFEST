@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flakeide-be
-          image: milkymilky0116/flake-ide-be:bfd1846
+          image: milkymilky0116/flake-ide-be:6dc05ba
           ports:
             - containerPort: 8081
           env:
