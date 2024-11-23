@@ -62,7 +62,7 @@ spec:
     - web
     - websecure
   routes:
-    - match: Host('dXNlcjFjb3Vyc2Ux.flakeide.com')
+    - match: Host(`dXNlcjFjb3Vyc2Ux.flakeide.com`)
       kind: Rule
       services:
         - name: ide-user1course1
