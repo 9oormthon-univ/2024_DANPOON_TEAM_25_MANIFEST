@@ -149,7 +149,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ide.dXNlcjFjb3Vyc2Ux
+  name: ide.user1course1
   namespace: argocd
   annotations:
     notifications.argoproj.io/subscribe.on-sync-succeeded: "true"
