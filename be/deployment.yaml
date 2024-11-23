@@ -46,8 +46,7 @@ spec:
                 secretKeyRef:
                   name: be-secret
                   key: db_name
-            - name: ACCESS_TOKEN_VALIDITY_TIME
-              value: 36000000
+
           resources:
             requests:
               cpu: 100m
