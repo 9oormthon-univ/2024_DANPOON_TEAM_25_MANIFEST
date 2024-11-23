@@ -87,3 +87,21 @@ spec:
           port: 8080
   tls:
     certResolver: myresolver
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: postgres
+  namespace: postgres
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`db.flakeide.com`)
+      kind: Rule
+      services:
+        - name: postgres
+          port: 5432
+  tls:
+    certResolver: myresolver
