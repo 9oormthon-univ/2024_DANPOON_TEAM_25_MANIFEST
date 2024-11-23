@@ -55,7 +55,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: be-secret
-                  key: SECRET_KEY
+                  key: secret_key
 
           resources:
             requests:
