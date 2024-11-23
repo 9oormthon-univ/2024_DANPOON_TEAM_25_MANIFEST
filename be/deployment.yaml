@@ -41,11 +41,21 @@ spec:
                 secretKeyRef:
                   name: be-secret
                   key: db_password
-            - name: DB_NAME
+            - name: kakao_client_id
               valueFrom:
                 secretKeyRef:
                   name: be-secret
-                  key: db_name
+                  key: kakao_client_id
+            - name: kakao_redirect_uri
+              valueFrom:
+                secretKeyRef:
+                  name: be-secret
+                  key: kakao_redirect_uri
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: be-secret
+                  key: SECRET_KEY
 
           resources:
             requests:
