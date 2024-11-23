@@ -158,7 +158,7 @@ spec:
   project: default
   source:
     repoURL: "https://github.com/9oormthon-univ/2024_DANPOON_TEAM_25_MANIFEST"
-    path: "ide.dXNlcjFjb3Vyc2Ux"
+    path: "ide.user1course1"
     targetRevision: main
   destination:
     server: "https://kubernetes.default.svc"
