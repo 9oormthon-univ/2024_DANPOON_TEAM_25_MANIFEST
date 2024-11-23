@@ -16,6 +16,14 @@ spec:
         app: traefik
     spec:
       serviceAccountName: traefik
+      initContainers:
+        - name: init-acme
+          image: busybox
+          command:
+            ["sh", "-c", "touch /data/acme.json && chmod 600 /data/acme.json"]
+          volumeMounts:
+            - name: acme
+              mountPath: /data
       containers:
         - name: traefik
           image: traefik:v2.9 # 가능한 최신 안정 버전 사용 권장
