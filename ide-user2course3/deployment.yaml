@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ide-user2course3
+  namespace: ide
+  labels:
+    app: ide-user2course3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ide-user2course3
+  template:
+    metadata:
+      labels:
+        app: ide-user2course3
+    spec:
+      containers:
+        - name: ide-user2course3
+          image: milkymilky0116/ide:Y291cnNlMw
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1Gi
+            limits:
+              cpu: 250m
+              memory: 2Gi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
